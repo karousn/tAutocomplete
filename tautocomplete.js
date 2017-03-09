@@ -21,12 +21,12 @@
         }, options);
 
         var cssClass = {
-            "default": "adropdown", 
+            "default": "adropdown",
             "classic": "aclassic",
             "white": "awhite"};
 
         settings.theme = cssClass[settings.theme];
-        
+
         // initialize DOM elements
         var el = {
             ddDiv: $("<div>", { class: settings.theme }),
@@ -47,7 +47,7 @@
             columnNA: "Error: Columns Not Defined",
             dataNA: "Error: Data Not Available"
         };
-        
+
         // plugin properties
         var tautocomplete = {
             id: function () {
@@ -103,7 +103,7 @@
         // create a textbox for input
         this.after(el.ddTextbox);
         el.ddTextbox.attr("autocomplete", "off");
-        el.ddTextbox.css("width", this.width + "px"); 
+        el.ddTextbox.css("width", this.width + "px");
         el.ddTextbox.css("font-size", this.css("font-size"));
         el.ddTextbox.attr("placeholder", settings.placeholder);
 
@@ -114,7 +114,7 @@
         else if ((settings.data == "" || settings.data == null) && settings.ajax == null) {
             el.ddTextbox.attr("placeholder", errors.dataNA);
         }
-        
+
         // append div after the textbox
         this.after(el.ddDiv);
 
@@ -282,7 +282,7 @@
         // textbox blur event
         el.ddTextbox.focusout(function () {
             hideDropDown();
-            // clear if the text value is invalid 
+            // clear if the text value is invalid
             if ($(this).val() != $(this).data("text")) {
 
                 var change = true;
@@ -312,7 +312,7 @@
             {
                 selectedData[settings.columns[i]] = selected.find('td').eq(i).text();
             }
-            
+
             el.ddTextbox.val(selected.find('td').eq(1).text());
             orginalTextBox.val(selected.find('td').eq(0).text() + '#$#' + selected.find('td').eq(1).text());
             hideDropDown();
@@ -386,6 +386,7 @@
                 var i = 0, j = 0;
                 var row = null, cell = null;
                 if (jsonData != null) {
+                    el.ddTable.append("<tbody>");
                     for (i = 0; i < jsonData.length; i++) {
 
                         // display only 15 rows of data
@@ -415,6 +416,7 @@
                         // append row to the table
                         el.ddTable.append("<tr>" + row + "</tr>");
                     }
+                    el.ddTable.append("<tbody>");
                 }
                 // show no records exists
                 if (i == 0)
